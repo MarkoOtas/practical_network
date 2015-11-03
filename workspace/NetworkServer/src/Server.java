@@ -93,6 +93,14 @@ public class Server {
 			System.out.println("Location: " + j + "  Value: " + usersList.get(j));
 		
 	}
+	
+	public boolean findUserOnServer(UserLaptop user){
+		if(usersList.exists(user)){
+			return true;
+		}
+		else
+			return false;
+	}
 
 
 }

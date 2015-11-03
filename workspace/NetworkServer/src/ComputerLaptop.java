@@ -1,4 +1,4 @@
-public class ComputerLaptop{
+public class ComputerLaptop {
 
 	private String hostName;
 	private String ipAddress;
@@ -7,6 +7,7 @@ public class ComputerLaptop{
 		this.hostName = hName;
 		this.ipAddress = ipAddress;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -36,6 +37,7 @@ public class ComputerLaptop{
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
+	
 
 
 }

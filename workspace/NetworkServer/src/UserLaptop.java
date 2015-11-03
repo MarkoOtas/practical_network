@@ -1,10 +1,21 @@
 public class UserLaptop {
+	
 	private String username;
 	private String password;
+	private ComputerLaptop cLap;
 
 	public UserLaptop(String name, String pass){
+		
 		this.username = name;
 		this.password = pass;
+		cLap = null;
+	}
+	
+	public boolean isConnected(){
+		if(this.cLap == null)
+			return true;
+		else
+			return false;
 	}
 
 	public int compareTo(String name){
@@ -44,5 +55,11 @@ public class UserLaptop {
 		return password;
 	}
 	
-  
+	public void connectToLaptop(ComputerLaptop lap){
+		if(isConnected())
+			System.out.println("User already connected!");
+		else{
+			this.cLap = lap;
+		}
+	}
 }
