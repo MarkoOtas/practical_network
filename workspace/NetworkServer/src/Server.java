@@ -102,5 +102,15 @@ public class Server {
 			return false;
 	}
 
-
+	public void connectToNetwork(String name, String pass){
+		UserLaptop user = new UserLaptop(name, pass);
+		if (usersList.exists(user) && (!user.isConnected())){
+			user.setcLap(new ComputerLaptop("Thanos-pc", "192.168.1.2"));
+		}
+		else
+			System.out.println("Unable to connect! User already connected or invalid username or password!");
+		
+	}
+	
+	
 }

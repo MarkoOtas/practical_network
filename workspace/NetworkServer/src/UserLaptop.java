@@ -55,11 +55,23 @@ public class UserLaptop {
 		return password;
 	}
 	
-	public void connectToLaptop(ComputerLaptop lap){
+	public void connectToNetwork(ComputerLaptop lap){
 		if(isConnected())
 			System.out.println("User already connected!");
 		else{
 			this.cLap = lap;
 		}
+	}
+	
+	public void disconnectFromNetwork(){
+		cLap = null;
+	}
+
+	public ComputerLaptop getcLap() {
+		return cLap;
+	}
+
+	public void setcLap(ComputerLaptop cLap) {
+		this.cLap = cLap;
 	}
 }
