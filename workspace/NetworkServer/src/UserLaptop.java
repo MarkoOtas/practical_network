@@ -13,9 +13,9 @@ public class UserLaptop {
 	
 	public boolean isConnected(){
 		if(this.cLap == null)
-			return true;
-		else
 			return false;
+		else
+			return true;
 	}
 
 	public int compareTo(String name){
@@ -41,8 +41,14 @@ public class UserLaptop {
 
 	@Override
 	public String toString() {
-		return "UserLaptop [username=" + username + ", password=" + password
-				+ "]";
+		
+		if(this.isConnected()){
+			return "UserLaptop [username=" + username + ", password=" + password
+					+ ", Connected on Computer: " + cLap.getHostName() + " with IP Address: " + cLap.getIpAddress()+ "]";
+		}
+		else
+			return "UserLaptop [username=" + username + ", password=" + password
+					+ "]";
 	}
 
 
@@ -55,7 +61,7 @@ public class UserLaptop {
 		return password;
 	}
 	
-	public void connectToNetwork(ComputerLaptop lap){
+	public void connect(ComputerLaptop lap){
 		if(isConnected())
 			System.out.println("User already connected!");
 		else{

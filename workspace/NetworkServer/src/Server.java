@@ -88,38 +88,46 @@ public class Server {
 		ArrayList<String> lst = new ArrayList<String>();
 		lst = FileRead.readFromFile(filePath);
 		generateDataStructure(lst);
-
-		for (int j=1; j<=usersList.size(); j++)
-			System.out.println("Location: " + j + "  Value: " + usersList.get(j));
 	}
 	
 	public void addUser(String name, String pass){
 		UserLaptop nUser = new UserLaptop(name, pass);
 		updateDS(nUser);
 		
-		for (int j=1; j<=usersList.size(); j++)
-			System.out.println("Location: " + j + "  Value: " + usersList.get(j));
-		
 	}
 	
-	public boolean findUserOnServer(UserLaptop user){
-		if(usersList.exists(user)){
-			return true;
-		}
-		else
-			return false;
-	}
 
 	public void connectToNetwork(String hName,String name, String pass){
-		UserLaptop user = new UserLaptop(name, pass);
 		ComputerLaptop laptop = new ComputerLaptop(hName, (String)ipAddress.pop());
-		if (usersList.exists(user) && (!user.isConnected())){
-			user.setcLap(new ComputerLaptop("Thanos-pc", "192.168.1.2"));
+		if (this.getUser(name, pass) != null){
+			((UserLaptop)getUser(name,pass)).connect(laptop);
 		}
 		else
 			System.out.println("Unable to connect! User already connected or invalid username or password!");
 		
 	}
 	
+	public void showUsers(){
+		for (int j=1; j<=usersList.size(); j++)
+			System.out.println("Location: " + j + "  Value: " + ((UserLaptop)usersList.get(j)).toString());
+	}
+	
+	private Object getUser(String name, String pass){
+		for (int j=1; j<=usersList.size(); j++){
+			if ((((UserLaptop)usersList.get(j)).getUsername().equalsIgnoreCase(name)) &&
+					(((UserLaptop)usersList.get(j)).getPassword().equalsIgnoreCase(pass))){
+				return usersList.get(j);
+			}
+				
+		}
+		return null;
+	}
+	
+	public void showConnected(){
+		for (int j=1; j<=usersList.size(); j++){
+			if(((UserLaptop)usersList.get(j)).getcLap() != null)
+				System.out.println("Location: " + j + "  Value: " + ((UserLaptop)usersList.get(j)).toString());		
+			}
+	}
 	
 }
