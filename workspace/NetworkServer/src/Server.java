@@ -5,29 +5,39 @@ public class Server {
 	private String filePath;
 	private ListInterface usersList;
 	private UserLaptop user;
+	private StackInterface ipAddress;
 
 	public Server(String fPath){
 		this.filePath = fPath;
 		usersList = new ReferenceBasedList();
+		this.generateIPs(); 
+	}
+	
+	private void generateIPs(){
+		ipAddress = new StackArrayBased();
+		/*int randomNum;
+		for(int i=0; i < 4; i++){
+			randomNum = 2 + (int)(Math.random()*255);
+			ipAddress.push("192.168.1."+randomNum);
+		
+		}*/
+		ipAddress.push("192.168.1.145");
+		ipAddress.push("192.168.1.189");
+		ipAddress.push("192.168.1.45");
+		ipAddress.push("192.168.1.204");
 	}
 	
 	private void generateDataStructure(ArrayList<String> lsta){
 		int pos = 1;
 		for(int i=0; i< lsta.size(); i=i+2){
-
 			user = new UserLaptop(lsta.get(i), lsta.get(i+1));
 			if(usersList.isEmpty()){
 				usersList.add(pos, user);
-
 			}
 			else if(user.compareTo(((UserLaptop)usersList.showLast()).getUsername()) == 1){
-
 				usersList.add(pos, user);
 			}
-
 			else{
-
-
 				int k = usersList.size();
 				System.out.println(k);
 				while(user.compareTo(((UserLaptop)usersList.get(k)).getUsername()) != 1){
@@ -37,10 +47,8 @@ public class Server {
 						k++;
 						break;
 					}
-
 				}		  
 				usersList.add(k+1, user);
-
 			}
 			pos++;
 		}
@@ -102,8 +110,9 @@ public class Server {
 			return false;
 	}
 
-	public void connectToNetwork(String name, String pass){
+	public void connectToNetwork(String hName,String name, String pass){
 		UserLaptop user = new UserLaptop(name, pass);
+		ComputerLaptop laptop = new ComputerLaptop(hName, (String)ipAddress.pop());
 		if (usersList.exists(user) && (!user.isConnected())){
 			user.setcLap(new ComputerLaptop("Thanos-pc", "192.168.1.2"));
 		}
