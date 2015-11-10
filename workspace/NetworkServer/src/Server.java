@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Server {
@@ -25,6 +26,7 @@ public class Server {
 		ipAddress.push("192.168.1.189");
 		ipAddress.push("192.168.1.45");
 		ipAddress.push("192.168.1.204");
+		ipAddress.push("192.168.1.221");
 	}
 	
 	private void generateDataStructure(ArrayList<String> lsta){
@@ -39,10 +41,10 @@ public class Server {
 			}
 			else{
 				int k = usersList.size();
-				System.out.println(k);
+				//System.out.println(k);
 				while(user.compareTo(((UserLaptop)usersList.get(k)).getUsername()) != 1){
 					k--;
-					System.out.println(k);
+					//System.out.println(k);
 					if(k==0){
 						k++;
 						break;
@@ -69,7 +71,7 @@ public class Server {
 
 
 			int k = usersList.size();
-			System.out.println(k);
+			//System.out.println(k);
 			while(newUser.compareTo(((UserLaptop)usersList.get(k)).getUsername()) != 1){
 				k--;
 				System.out.println(k);
@@ -92,11 +94,59 @@ public class Server {
 	
 	public void addUser(String name, String pass){
 		UserLaptop nUser = new UserLaptop(name, pass);
-		updateDS(nUser);
+		
+		if (this.getUser(name, pass) == null){
+			updateDS(nUser);
+		}
+		else
+			System.out.println("The user already exists!");
+			
+	}
+	
+	public void removeUser(String name1, String pass1){		
+		for(int i=1; i<=usersList.size(); i++){
+			if(name1.equals(((UserLaptop)usersList.get(i)).getUsername()) && pass1.equals(((UserLaptop)usersList.get(i)).getPassword())){
+				if(((UserLaptop)usersList.get(i)).getcLap() != null){
+					ipAddress.push(((UserLaptop)usersList.get(i)).getcLap().getIpAddress());
+				}
+				
+				usersList.remove(i);
+				System.out.println("The user has successfully removed!");
+				break;
+			}
+			
+		}
 		
 	}
 	
-
+	
+	public void pingIpAddress(String ipAddress){
+		for(int i=1; i<=usersList.size(); i++){
+			if(((UserLaptop)usersList.get(i)).isConnected()){
+				if(ipAddress == ((UserLaptop)usersList.get(i)).getcLap().getIpAddress()){
+					System.out.println("Sending Ping Request to " + ipAddress);
+					break;
+				}
+				else
+					System.out.println(ipAddress + "Sorry, but the Ip Address provided is not connected to the network");
+			}
+		}
+	}
+	public void pingHostName(String hostName){
+		for(int i=1; i<=usersList.size(); i++){
+			if(((UserLaptop)usersList.get(i)).isConnected()){
+				if(hostName == ((UserLaptop)usersList.get(i)).getcLap().getHostName()){
+					System.out.println("Sending Ping Request to " + hostName); 
+					break;
+				}
+				else
+					System.out.println(hostName + "Sorry, but the host name provided is not connected to the network");
+			}
+			
+		}
+		
+		
+	}
 	public void connectToNetwork(String hName,String name, String pass){
 		ComputerLaptop laptop = new ComputerLaptop(hName, (String)ipAddress.pop());
 		if (this.getUser(name, pass) != null){
