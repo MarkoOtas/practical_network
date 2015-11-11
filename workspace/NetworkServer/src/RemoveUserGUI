@@ -88,7 +88,7 @@ public class RemoveUserGUI extends JFrame{
     }
 
     private void bBack_actionPerformed(ActionEvent e) {
-    	JFrame b = new ServerGUI();
+    	JFrame b = new ServerGUI(ser);
         b.pack();
         b.setLocationRelativeTo(null);
         b.setVisible(true);
