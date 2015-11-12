@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +13,11 @@ public class UserGUI extends JFrame{
     private JButton bDisconnectFromNetwork;
     private JButton bPingComputer;
     private JButton bBack;
+    private Server s;
     
-    public UserGUI(){
+    public UserGUI(Server s){
     	
+    	this.s = s;
     	contentPane = (JPanel)this.getContentPane();
     	contentPane.setPreferredSize(new Dimension(300,300));
         this.setTitle("UserWindow");
@@ -31,8 +32,8 @@ public class UserGUI extends JFrame{
         bConnectToNetwork.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            		dispose();
-            		bConnectToNetwork_actionPerformed(e);
+            	bConnectToNetwork_actionPerformed(e);
+            	dispose();
             }
         });
         bDisconnectFromNetwork = new JButton("Disconnect From Network");
@@ -40,14 +41,9 @@ public class UserGUI extends JFrame{
         buttonPane.add(bDisconnectFromNetwork);
         bDisconnectFromNetwork.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            	try{	
-            		bDisconnectFromNetwork_actionPerformed(e);
-            		dispose();
-            	}
-            	catch(Exception ex){
-            		JOptionPane.showMessageDialog(null, "First you have to create new student class", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
-            	}
+            public void actionPerformed(ActionEvent e) {	
+            	bDisconnectFromNetwork_actionPerformed(e);
+            	dispose();
             }
         });
         
@@ -57,22 +53,18 @@ public class UserGUI extends JFrame{
         bPingComputer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	try{
-            		bPingComputer_actionPerformed(e);
-            		dispose();
-            	}
-            	catch(Exception ex){
-            		JOptionPane.showMessageDialog(null, "First you have to create new student class", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
-            	}
+            	bPingComputer_actionPerformed(e);
+            	dispose();
+            	
             }
         });
         
         bBack = new JButton("Back");
         bBack.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            	dispose();
+            public void actionPerformed(ActionEvent e) {            	
             	bBack_actionPerformed(e);
+            	dispose();
             }
         });
         bBack.setBackground(Color.white);
@@ -84,21 +76,21 @@ public class UserGUI extends JFrame{
     }
 
     private void bConnectToNetwork_actionPerformed(ActionEvent e) {
-      	JFrame ctn = new ();
+      	JFrame ctn = new ConnectToNetworkGUI(s);
         ctn.pack();
         ctn.setLocationRelativeTo(null);
         ctn.setVisible(true);
     }
 
     public void bDisconnectFromNetwork_actionPerformed(ActionEvent e){
-        JFrame dfn = new ();
+        JFrame dfn = new DisconnectFromNetworkGUI(s);
         dfn.pack();
         dfn.setLocationRelativeTo(null);
         dfn.setVisible(true);
     }
     
     public void bPingComputer_actionPerformed(ActionEvent e){
-        JFrame pc  = new ();
+        JFrame pc  = new PingComputerGUI(s);
         pc.pack();
         pc.setLocationRelativeTo(null);
         pc.setVisible(true);

@@ -13,6 +13,8 @@ public class MainGUI extends JFrame{
     private JButton bNetworkUser;
     private JButton bExit;
     
+    private Server s = new Server("/home/marko/Desktop/inpufile.txt");
+    
     public MainGUI(){
     	
     	contentPane = (JPanel)this.getContentPane();
@@ -66,15 +68,14 @@ public class MainGUI extends JFrame{
     }
 
     private void bNetworkServer_actionPerformed(ActionEvent e) {
-      	JFrame server = new ServerGUI();
-      	
+      	JFrame server = new ServerGUI(s);      	
         server.pack();
         server.setLocationRelativeTo(null);
         server.setVisible(true);
     }
 
     public void bNetworkUser_actionPerformed(ActionEvent e){
-        JFrame user = new UserGUI();
+        JFrame user = new UserGUI(s);
         user.pack();
         user.setLocationRelativeTo(null);
         user.setVisible(true);

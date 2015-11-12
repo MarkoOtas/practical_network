@@ -16,11 +16,10 @@ public class ServerGUI extends JFrame{
     private JButton bRemoveUser;
     private JButton bViewComputers;
     private JButton bBack;
-    
-    private Server s = new Server("/home/marko/Desktop/inpufile.txt");
-    
-    public ServerGUI(){
+    private Server s;
+    public ServerGUI(Server s){
     	
+    	this.s = s;
     	contentPane = (JPanel)this.getContentPane();
     	contentPane.setPreferredSize(new Dimension(300,300));
         this.setTitle("ServerWindow");
@@ -134,7 +133,7 @@ public class ServerGUI extends JFrame{
     }
     
     public void bViewComputers_actionPerformed(ActionEvent e){
-        JFrame vc = new ViewComputersGUI();
+        JFrame vc = new ViewComputersGUI(s);
         vc.pack();
         vc.setLocationRelativeTo(null);
         vc.setVisible(true);

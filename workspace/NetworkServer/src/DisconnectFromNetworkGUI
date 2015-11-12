@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class AddUserGUI extends JFrame{
+public class DisconnectFromNetworkGUI extends JFrame{
 
     private JPanel contentPane;
     private JPanel detailsPane;
@@ -20,24 +19,30 @@ public class AddUserGUI extends JFrame{
 
     private JLabel lUsername;
     private JLabel lPassword;
+    private JLabel lHostname;
     
     private JTextField tUsername;
     private JTextField tPassword;
+    private JTextField tHostname;
 
-    private JButton bAdd;
+    private JButton bDisconnect;
     private JButton bBack;
     
     private Server ser;
+    
+    public DisconnectFromNetworkGUI(Server s){
 
-    public AddUserGUI(Server s){
-
-        this.ser = s;
+    	this.ser = s;
     	contentPane = (JPanel)this.getContentPane();
         contentPane.setPreferredSize(new Dimension(350,100));
-        this.setTitle("Add User");
+        this.setTitle("Disconnect User To Network");
 
         detailsPane = new JPanel();
-        detailsPane.setLayout(new GridLayout(2,2));
+        detailsPane.setLayout(new GridLayout(3,2));
+        lHostname = new JLabel("Host Name");
+        detailsPane.add(lHostname);
+        tHostname = new JTextField();
+        detailsPane.add(tHostname);
         lUsername = new JLabel("User Name");
         detailsPane.add(lUsername);
         tUsername = new JTextField();
@@ -50,36 +55,37 @@ public class AddUserGUI extends JFrame{
         buttonPane = new JPanel();
         buttonPane.setLayout(new FlowLayout());
         
-        bAdd = new JButton("Add User");
-        bAdd.addActionListener(new ActionListener() {
+        bDisconnect = new JButton("Disconnect User");
+        bDisconnect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	try{
                 	if(tUsername.getText() != null && !tUsername.getText().isEmpty() && tUsername.getText() instanceof  String){
                 		if(tPassword.getText() != null && !tPassword.getText().isEmpty() && tPassword.getText() instanceof  String){
-                			bAdd_actionPerformed(e);
+                			tHostname.getText();
+                			bDisconnect_actionPerformed(e);
                 		}
                 		else{
                 			JOptionPane.showMessageDialog(null, "Please provide password", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
                 		}
                 	}
                 	else{
-                		JOptionPane.showMessageDialog(null, "Please provide user name as a string", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
+                		JOptionPane.showMessageDialog(null, "Please provide user name", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
                 	}
                 }
-                catch (NumberFormatException wi) {
-            		JOptionPane.showMessageDialog(null, "You need to specify password as a number ", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
+                catch (Exception ei) {
+            		JOptionPane.showMessageDialog(null, "You need to specify the host name", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
-        buttonPane.add(bAdd);
+        buttonPane.add(bDisconnect);
         
         bBack = new JButton("Back");
         bBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
             	bBack_actionPerformed(e);
+            	dispose();
             }
         });
         buttonPane.add(bBack);
@@ -89,17 +95,19 @@ public class AddUserGUI extends JFrame{
     }
 
     private void bBack_actionPerformed(ActionEvent e) {
-    	JFrame b = new ServerGUI(ser);
+    	JFrame b = new UserGUI(ser);
         b.pack();
         b.setLocationRelativeTo(null);
         b.setVisible(true);
     }
 
-    public void bAdd_actionPerformed(ActionEvent e) {
+    public void bDisconnect_actionPerformed(ActionEvent e) {
 	
-        this.ser.addUser(this.tUsername.getText(), this.tPassword.getText());
+        this.ser.disconnectFromNetwork(this.tHostname.getText(), this.tUsername.getText(), this.tPassword.getText());
  
         this.tUsername.setText("");
-        this.tPassword.setText("");    
+        this.tPassword.setText(""); 
+        this.tHostname.setText(""); 
     }
 }
+
