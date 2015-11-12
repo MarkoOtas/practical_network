@@ -1,6 +1,6 @@
 public class StackArrayBased implements StackInterface
 {
-	final int MAX_SIZE = 10;
+	final int MAX_SIZE = 5;
 	private Object items[];
 	private int top;
   
