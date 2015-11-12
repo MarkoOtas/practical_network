@@ -5,7 +5,6 @@ public class Server {
 
 	private String filePath;
 	private ListInterface usersList;
-	private UserLaptop user;
 	private StackInterface ipAddress;
 
 	public Server(String fPath){
@@ -25,30 +24,12 @@ public class Server {
 	}
 	
 	private void generateDataStructure(ArrayList<String> lsta){
-		int pos = 1;
-		for(int i=0; i< lsta.size(); i=i+2){
-			user = new UserLaptop(lsta.get(i), lsta.get(i+1));
-			if(usersList.isEmpty()){
-				usersList.add(pos, user);
-			}
-			else if(user.compareTo(((UserLaptop)usersList.showLast()).getUsername()) == 1){
-				usersList.add(pos, user);
-			}
-			else{
-				int k = usersList.size();
-				//System.out.println(k);
-				while(user.compareTo(((UserLaptop)usersList.get(k)).getUsername()) != 1){
-					k--;
-					//System.out.println(k);
-					if(k==0){
-						k++;
-						break;
-					}
-				}		  
-				usersList.add(k+1, user);
-			}
-			pos++;
-		}	
+		
+	    int pos = 1;
+		for (int i=0;i<lsta.size();i = i+2){
+			usersList.add(pos, new UserLaptop(lsta.get(i), lsta.get(i+1)));
+			pos ++;
+		}
 	}
 	
 	private void updateDS(UserLaptop newUser){
@@ -60,10 +41,8 @@ public class Server {
 		}
 		else {
 			int k = usersList.size();
-			//System.out.println(k);
 			while(newUser.compareTo(((UserLaptop)usersList.get(k)).getUsername()) != 1){
 				k--;
-				//System.out.println(k);
 				if(k==0){
 					k++;
 					break;
@@ -181,4 +160,11 @@ public class Server {
 		if(!any)
 			System.out.println("Looks like there are no computers connected!");
 	}	
+	
+	public void closeSystem(){
+		for (int i=1; i<=usersList.size(); i++){
+			FileWrite.writeToFile("/home/imagine/workspace/NetworkServer/src/inputfile.txt", ((UserLaptop)usersList.get(i)).getUsername(), ((UserLaptop)usersList.get(i)).getPassword());
+			
+		}
+	}
 }

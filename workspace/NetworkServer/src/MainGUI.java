@@ -52,8 +52,8 @@ public class MainGUI extends JFrame{
         bExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //FileWrite.writeToFile("/home/imagine/workspace/NetworkServer/src/inputfile.txt");
                 System.exit(0);
-                //dispose();
             }
         });
         bExit.setBackground(Color.LIGHT_GRAY);

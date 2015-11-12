@@ -2,13 +2,13 @@ import java.io.*; /* Required for handling the IOExceptions */
 
 public class FileWrite
 {
-	public static void main( String [ ] args )
+	/*public static void main( String [ ] args )
 	{
 		writeToFile( "outputfile.txt" );
-	}
+	}*/
 
 	/* Method that writes contents to a file with the file name 'fileName' */
-	public static void writeToFile( String fileName )
+	public static void writeToFile( String fileName , String name, String pass)
 	{
 		try
 		{
@@ -20,8 +20,10 @@ public class FileWrite
 			PrintWriter fileOut = new PrintWriter( theFile );
 			
 			/* Print some lines to the file using the println method */
-			for (int i=0; i<10; i++)
-				fileOut.println( "Writing line " + i + " to the file." );
+			
+			fileOut.println( name + "\n" + pass);
+			
+				
 
 			/* Close the file so that it is no longer accessible to the program */
 			fileOut.close( );

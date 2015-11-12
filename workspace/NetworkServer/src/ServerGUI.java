@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class ServerGUI extends JFrame{
 	
-	private boolean netUp = false;
+	private static boolean netUp = false;
 	
     protected JPanel contentPane;
     private JPanel mainGuiPane;
@@ -17,7 +17,7 @@ public class ServerGUI extends JFrame{
     private JButton bViewComputers;
     private JButton bBack;
     
-    private Server s = new Server("/home/marko/Desktop/inpufile.txt");
+    private Server s = new Server("/home/imagine/workspace/NetworkServer/src/inputfile.txt");
     
     public ServerGUI(){
     	
@@ -28,10 +28,14 @@ public class ServerGUI extends JFrame{
         
         buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(5,1));
-        
         bStartServer = new JButton("Start Server");
         bStartServer .setBackground(Color.LIGHT_GRAY);
         buttonPane.add(bStartServer );
+        if(isNetUp()){
+        	bStartServer.setEnabled(false);
+    		bStartServer.setText("Running...");
+        }
+    		
         bStartServer .addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,10 +54,10 @@ public class ServerGUI extends JFrame{
         bAddUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	try{
+            	if(isNetUp()){
             		bAddUser_actionPerformed(e);
             	}
-            	catch (Exception ex){
+            	else{
             		JOptionPane.showMessageDialog(null, "Firstly you have to start the server", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
             	}
             }
@@ -65,10 +69,10 @@ public class ServerGUI extends JFrame{
         bRemoveUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	try{
+            	if(isNetUp()){
             		bRemoveUser_actionPerformed(e);
             	}
-            	catch(Exception ex){
+            	else{
             		JOptionPane.showMessageDialog(null, "Firstly you have to start the server", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
             	}
             }
@@ -77,17 +81,17 @@ public class ServerGUI extends JFrame{
         bViewComputers = new JButton("View Computers");
         bViewComputers.setBackground(Color.white);
         buttonPane.add(bViewComputers);
-        bViewComputers.addActionListener(new ActionListener() {
+        /*bViewComputers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	try{
+            	if(isNetUp()){
             		bViewComputers_actionPerformed(e);
             	}
-            	catch(Exception ex){
+            	else{
             		JOptionPane.showMessageDialog(null, "Firstly you have to start the server", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
             	}
             }
-        });
+        });*/
         
         bBack = new JButton("Back");
         bBack.setBackground(Color.LIGHT_GRAY);
@@ -133,12 +137,12 @@ public class ServerGUI extends JFrame{
         ru.setVisible(true);
     }
     
-    public void bViewComputers_actionPerformed(ActionEvent e){
+    /*public void bViewComputers_actionPerformed(ActionEvent e){
         JFrame vc = new ViewComputersGUI();
         vc.pack();
         vc.setLocationRelativeTo(null);
         vc.setVisible(true);
-    }
+    }*/
     
     public void bBack_actionPerformed(ActionEvent e){
         JFrame b = new MainGUI();
