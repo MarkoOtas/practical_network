@@ -127,3 +127,12 @@ Java Model Exception: Java Model Status [<project root> [in ScrapeWeb] is not on
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
 !SUBENTRY 1 org.eclipse.jdt.core 4 1006 2015-11-07 20:51:03.084
 !MESSAGE <project root> [in ScrapeWeb] is not on its project's build path
+!SESSION 2015-11-12 17:46:47.327 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_85
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2015-11-12 17:47:01.893
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.

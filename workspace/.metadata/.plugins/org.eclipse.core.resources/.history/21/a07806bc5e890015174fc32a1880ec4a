@@ -1,0 +1,15 @@
+
+import javax.swing.*;
+
+public class ViewComputersGUI extends JFrame {
+
+
+    private ComputerLaptop cl;
+    private UserLaptop ul;
+
+    public ViewComputersGUI() {
+
+        
+
+    }
+}

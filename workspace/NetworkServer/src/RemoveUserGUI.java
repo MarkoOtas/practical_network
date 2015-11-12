@@ -26,11 +26,9 @@ public class RemoveUserGUI extends JFrame{
     private JButton bRemove;
     private JButton bBack;
     
-    private Server ser;
 
-    public RemoveUserGUI(Server s){
+    public RemoveUserGUI(){
 
-    	this.ser = s;
     	contentPane = (JPanel)this.getContentPane();
         contentPane.setPreferredSize(new Dimension(350,100));
         this.setTitle("Remove User");
@@ -53,22 +51,19 @@ public class RemoveUserGUI extends JFrame{
         bRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	try{
-                	if(tUsername.getText() != null && !tUsername.getText().isEmpty() && tUsername.getText() instanceof  String){
-                		if(tPassword.getText() != null && !tPassword.getText().isEmpty() && tPassword.getText() instanceof  String){
-                			bRemove_actionPerformed(e);
-                		}
-                		else{
-                			JOptionPane.showMessageDialog(null, "Please provide password", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
-                		}
-                	}
-                	else{
-                		JOptionPane.showMessageDialog(null, "Please provide user name as a string", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
-                	}
-                }
-                catch (NumberFormatException wi) {
-            		JOptionPane.showMessageDialog(null, "You need to specify password as a number ", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
-                }
+            	
+            	if(tUsername.getText() != null && !tUsername.getText().isEmpty() && tUsername.getText() instanceof  String){
+            		if(tPassword.getText() != null && !tPassword.getText().isEmpty() && tPassword.getText() instanceof  String){
+            			bRemove_actionPerformed(e);
+            		}
+            		else{
+            			JOptionPane.showMessageDialog(null, "Please provide password", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
+            		}
+            	}
+            	else{
+            		JOptionPane.showMessageDialog(null, "Please provide user name as a string", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
+            	}
+                
             }
         });
         buttonPane.add(bRemove);
@@ -88,15 +83,15 @@ public class RemoveUserGUI extends JFrame{
     }
 
     private void bBack_actionPerformed(ActionEvent e) {
-    	JFrame b = new ServerGUI(ser);
-        b.pack();
+    	this.dispose();
+        /*b.pack();
         b.setLocationRelativeTo(null);
-        b.setVisible(true);
+        b.setVisible(true);*/
     }
 
     public void bRemove_actionPerformed(ActionEvent e) {
     	try{
-    		this.ser.removeUser(this.tUsername.getText(), this.tPassword.getText());
+    		ServerGUI.getServer().removeUser(this.tUsername.getText(), this.tPassword.getText());
     	}
     	catch (Exception ei){
     		JOptionPane.showMessageDialog(null, "The user with that name and password does not exist", "WRONG !!!", JOptionPane.ERROR_MESSAGE);

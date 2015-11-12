@@ -1,0 +1,40 @@
+public class test
+{
+	public static void main(String[] args)
+	{
+		
+
+		Server s = new Server("/home/imagine/workspace/NetworkServer/src/inputfile2.txt");
+		s.startServer();
+		s.addUser("ldfj", "123");
+		s.addUser("lsajf", "123");
+		s.addUser("oeirut", "123");
+		s.addUser("ncbv", "123");
+		s.addUser("pyu", "123");
+		
+		s.connectToNetwork("Kostas-pc", "dranidis", "dhr342");
+		s.connectToNetwork("Thanos-pc", "nikos", "123");
+		
+		//s.showUsers();
+		
+		//s.showConnected();
+		int posEqual = 0;
+		int posComma = 0;
+		for (int i = 0; i < s.showConnected().length; i++) {
+			try {
+				posEqual = s.showConnected()[i].indexOf("=", 5);
+				posComma = s.showConnected()[i].indexOf(",", 5);
+				System.out.println( "Username: " + s.showConnected()[i].substring(posEqual, posComma));
+				posEqual = s.showConnected()[i].indexOf("=", posComma);
+				posComma = s.showConnected()[i].indexOf(",", posEqual);
+				System.out.println("Password: " + s.showConnected()[i].substring(posEqual, posComma));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		s.closeSystem();
+		
+		
+	}
+};

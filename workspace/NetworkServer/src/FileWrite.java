@@ -8,7 +8,7 @@ public class FileWrite
 	}*/
 
 	/* Method that writes contents to a file with the file name 'fileName' */
-	public static void writeToFile( String fileName , String name, String pass)
+	public static void writeToFile( String fileName , String data)
 	{
 		try
 		{
@@ -21,7 +21,7 @@ public class FileWrite
 			
 			/* Print some lines to the file using the println method */
 			
-			fileOut.println( name + "\n" + pass);
+			fileOut.println(data);
 			
 				
 

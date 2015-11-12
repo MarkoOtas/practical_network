@@ -52,7 +52,7 @@ public class MainGUI extends JFrame{
         bExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //FileWrite.writeToFile("/home/imagine/workspace/NetworkServer/src/inputfile.txt");
+            	ServerGUI.getServer().closeSystem();
                 System.exit(0);
             }
         });

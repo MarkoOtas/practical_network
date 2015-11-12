@@ -84,21 +84,21 @@ public class UserGUI extends JFrame{
     }
 
     private void bConnectToNetwork_actionPerformed(ActionEvent e) {
-      	JFrame ctn = new JFrame();
+      	JFrame ctn = new ConnectToNetworkGUI();
         ctn.pack();
         ctn.setLocationRelativeTo(null);
         ctn.setVisible(true);
     }
 
     public void bDisconnectFromNetwork_actionPerformed(ActionEvent e){
-        JFrame dfn = new JFrame();
+        JFrame dfn = new DisconnectFromNetworkGUI();
         dfn.pack();
         dfn.setLocationRelativeTo(null);
         dfn.setVisible(true);
     }
     
     public void bPingComputer_actionPerformed(ActionEvent e){
-        JFrame pc  = new JFrame();
+        JFrame pc  = new PingComputerGUI();
         pc.pack();
         pc.setLocationRelativeTo(null);
         pc.setVisible(true);

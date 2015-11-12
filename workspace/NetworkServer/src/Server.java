@@ -55,7 +55,12 @@ public class Server {
 	public void startServer(){
 		ArrayList<String> lst = new ArrayList<String>();
 		lst = FileRead.readFromFile(filePath);
-		generateDataStructure(lst);
+		try {
+			generateDataStructure(lst);
+		} catch (IndexOutOfBoundsException e) {
+			// TODO Auto-generated catch block
+			System.out.println("No users");
+		}
 	}
 	
 	public void addUser(String name, String pass){
@@ -149,22 +154,31 @@ public class Server {
 		return null;
 	}
 	
-	public void showConnected(){
+	public String[] showConnected(){
+		String[] con = new String[5];
+		int pos = 0;
 		boolean any = false;
 		for (int j=1; j<=usersList.size(); j++){
 			if(((UserLaptop)usersList.get(j)).getcLap() != null){
-				System.out.println("Location: " + j + "  Value: " + ((UserLaptop)usersList.get(j)).toString());
+				//System.out.println("Location: " + j + "  Value: " + ((UserLaptop)usersList.get(j)).toString());
+				con[pos] += ((UserLaptop)usersList.get(j)).toString();
+				pos++;
 				any=true;
 			}
 		}
-		if(!any)
+		if(!any){
 			System.out.println("Looks like there are no computers connected!");
+		}
+		return con;
 	}	
 	
 	public void closeSystem(){
+		String serverData = "";
 		for (int i=1; i<=usersList.size(); i++){
-			FileWrite.writeToFile("/home/imagine/workspace/NetworkServer/src/inputfile.txt", ((UserLaptop)usersList.get(i)).getUsername(), ((UserLaptop)usersList.get(i)).getPassword());
+			serverData += ((UserLaptop)usersList.get(i)).getUsername() + "\n" + ((UserLaptop)usersList.get(i)).getPassword() + "\n";
 			
 		}
+		FileWrite.writeToFile("src/inputFile.txt", serverData);
+
 	}
 }

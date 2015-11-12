@@ -1,0 +1,37 @@
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+public class ViewComputersGUI extends JFrame {
+
+	
+	private JPanel contentPane;
+	private JTable table;
+	private DefaultTableModel myTable;
+
+    private ComputerLaptop cl;
+    private UserLaptop ul;
+
+    public ViewComputersGUI() {
+    	
+    	contentPane = (JPanel)this.getContentPane();
+    	setTitle("Computers Connected");
+    	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    	
+    	myTable = new DefaultTableModel();
+    	table = new JTable(myTable);
+    	constructTable();
+    	myTable.addColumn("IPs");
+    	
+    	myTable.addColumn("Host Name");
+    	myTable.addColumn("Username");
+    	contentPane.add(table);
+    	
+    	
+    }
+
+	private void constructTable() {
+		ServerGUI.getServer().showConnected();
+	}
+}

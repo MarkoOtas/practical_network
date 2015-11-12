@@ -27,11 +27,8 @@ public class AddUserGUI extends JFrame{
     private JButton bAdd;
     private JButton bBack;
     
-    private Server ser;
+    public AddUserGUI(){
 
-    public AddUserGUI(Server s){
-
-        this.ser = s;
     	contentPane = (JPanel)this.getContentPane();
         contentPane.setPreferredSize(new Dimension(350,100));
         this.setTitle("Add User");
@@ -89,15 +86,15 @@ public class AddUserGUI extends JFrame{
     }
 
     private void bBack_actionPerformed(ActionEvent e) {
-    	JFrame b = new ServerGUI(ser);
-        b.pack();
+    	this.dispose();
+        /*b.pack();
         b.setLocationRelativeTo(null);
-        b.setVisible(true);
+        b.setVisible(true);*/
     }
 
     public void bAdd_actionPerformed(ActionEvent e) {
 	
-        this.ser.addUser(this.tUsername.getText(), this.tPassword.getText());
+        ServerGUI.getServer().addUser(this.tUsername.getText(), this.tPassword.getText());
  
         this.tUsername.setText("");
         this.tPassword.setText("");    

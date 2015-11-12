@@ -44,7 +44,7 @@ public class UserLaptop {
 		
 		if(this.isConnected()){
 			return "UserLaptop [username=" + username + ", password=" + password
-					+ ", Connected on Computer: " + cLap.getHostName() + " with IP Address: " + cLap.getIpAddress()+ "]";
+					+ " Connected on Computer: " + cLap.getHostName() + ", with IP Address: " + cLap.getIpAddress()+ "]";
 		}
 		else
 			return "UserLaptop [username=" + username + ", password=" + password

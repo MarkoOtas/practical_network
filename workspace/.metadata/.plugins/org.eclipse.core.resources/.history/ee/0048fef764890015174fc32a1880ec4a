@@ -1,0 +1,54 @@
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+public class ViewComputersGUI extends JFrame {
+
+	
+	private JPanel contentPane;
+	private JTable table;
+	private DefaultTableModel myTable;
+
+    private ComputerLaptop cl;
+    private UserLaptop ul;
+
+    public ViewComputersGUI() {
+    	
+    	contentPane = (JPanel)this.getContentPane();
+    	setTitle("Computers Connected");
+    	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    	
+    	myTable = new DefaultTableModel();
+    	table = new JTable(myTable);
+    	constructTable();
+    	myTable.addColumn("IPs");
+    	
+    	myTable.addColumn("Host Name");
+    	myTable.addColumn("Username");
+    	contentPane.add(table);
+    	
+    	
+    }
+
+	private void constructTable() {
+	 	String[] conUsers = ServerGUI.getServer().showConnected();
+	 	int posEqual = 0;
+		int posComma = 0;
+		Object[] row = Object[3];
+		for (int i = 0; i < conUsers.length; i++) {
+			try {
+				posEqual = conUsers[i].indexOf("=", 0);
+				posComma = conUsers[i].indexOf(",", 0);
+				myTable.
+				System.out.println( "Username: " + conUsers[i].substring(posEqual+1, posComma));
+				posEqual = s.showConnected()[i].indexOf("=", posComma);
+				posComma = s.showConnected()[i].indexOf(",", posEqual);
+				System.out.println("Password: " + s.showConnected()[i].substring(posEqual+1, posComma));
+			} catch (NullPointerException e) {
+				// TODO Auto-generated catch block
+				System.out.println("No other users connected");
+			}
+		}
+	}
+}

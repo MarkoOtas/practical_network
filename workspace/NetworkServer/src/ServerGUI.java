@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class ServerGUI extends JFrame{
 	
 	private static boolean netUp = false;
+	private static Server server = new Server("src/inputfile2.txt");;
 	
     protected JPanel contentPane;
     private JPanel mainGuiPane;
@@ -16,9 +17,7 @@ public class ServerGUI extends JFrame{
     private JButton bRemoveUser;
     private JButton bViewComputers;
     private JButton bBack;
-    
-    private Server s = new Server("/home/imagine/workspace/NetworkServer/src/inputfile.txt");
-    
+        
     public ServerGUI(){
     	
     	contentPane = (JPanel)this.getContentPane();
@@ -81,7 +80,7 @@ public class ServerGUI extends JFrame{
         bViewComputers = new JButton("View Computers");
         bViewComputers.setBackground(Color.white);
         buttonPane.add(bViewComputers);
-        /*bViewComputers.addActionListener(new ActionListener() {
+        bViewComputers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	if(isNetUp()){
@@ -91,7 +90,7 @@ public class ServerGUI extends JFrame{
             		JOptionPane.showMessageDialog(null, "Firstly you have to start the server", "WRONG !!!", JOptionPane.ERROR_MESSAGE);
             	}
             }
-        });*/
+        });
         
         bBack = new JButton("Back");
         bBack.setBackground(Color.LIGHT_GRAY);
@@ -119,32 +118,37 @@ public class ServerGUI extends JFrame{
 
 
     private void bStartServer_actionPerformed(ActionEvent e) {
-      	s.startServer();
+      	
+    	server.startServer();
     }
     
     private void bAddUser_actionPerformed(ActionEvent e) {
       	
-    	JFrame au = new AddUserGUI(s);
+    	JFrame au = new AddUserGUI();
         au.pack();
         au.setLocationRelativeTo(null);
         au.setVisible(true);
     }
 
     public void bRemoveUser_actionPerformed(ActionEvent e){
-    	JFrame ru = new RemoveUserGUI(s);
+    	JFrame ru = new RemoveUserGUI();
         ru.pack();
         ru.setLocationRelativeTo(null);
         ru.setVisible(true);
     }
     
-    /*public void bViewComputers_actionPerformed(ActionEvent e){
+    public void bViewComputers_actionPerformed(ActionEvent e){
         JFrame vc = new ViewComputersGUI();
         vc.pack();
         vc.setLocationRelativeTo(null);
         vc.setVisible(true);
-    }*/
+    }
     
-    public void bBack_actionPerformed(ActionEvent e){
+    public static Server getServer() {
+		return server;
+	}
+
+	public void bBack_actionPerformed(ActionEvent e){
         JFrame b = new MainGUI();
         b.pack();
         b.setLocationRelativeTo(null);
