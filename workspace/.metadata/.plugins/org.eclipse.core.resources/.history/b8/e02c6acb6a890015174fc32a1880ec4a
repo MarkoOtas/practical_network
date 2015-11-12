@@ -1,6 +1,5 @@
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,23 +19,20 @@ public class ViewComputersGUI extends JFrame {
     	
     	contentPane = (JPanel)this.getContentPane();
     	setTitle("Computers Connected");
-    	contentPane.setPreferredSize(new Dimension(600,200));
     	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     	Object[] colNames = {"Host Name", "IP", "Username"};
-    	myTable = new DefaultTableModel();
+    	myTable = new DefaultTableModel(colNames, 5);
     	table = new JTable(myTable);
     	myTable.addColumn("IPs");
     	
     	myTable.addColumn("Host Name");
     	myTable.addColumn("Username");
-    	myTable.addRow(colNames);
     	constructTable();
     	
     	contentPane.add(table, BorderLayout.CENTER);
     	
     	
     }
-
 
 	private void constructTable() {
 	 	String[] conUsers = ServerGUI.getServer().showConnected();
@@ -55,9 +51,7 @@ public class ViewComputersGUI extends JFrame {
 				myTable.addRow(row);
 			} catch (NullPointerException e) {
 				// TODO Auto-generated catch block
-				row[0] = "";
-				row[1] = "";
-				row[2] = "";
+				System.out.println("No other users connected");
 			}
 		}
 	}

@@ -166,9 +166,9 @@ public class Server {
 				any=true;
 			}
 		}
-		/*if(!any){
-			System.out.println("Looks like there are no computers connected!");
-		}*/
+		if(!any){
+			return null;
+		}
 		return con;
 	}	
 	
